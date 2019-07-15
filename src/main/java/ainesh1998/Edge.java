@@ -12,4 +12,10 @@ public class Edge extends Piece {
 //        this.currentPosition = position;
         this.originalPosition = position;
     }
+
+    public void flip() {
+        Colour temp = firstColour;
+        firstColour = secondColour;
+        secondColour = temp;
+    }
 }

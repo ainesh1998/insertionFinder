@@ -16,5 +16,17 @@ public class Corner extends Piece {
         this.originalPosition = position;
     }
 
+    public void twistClockwise() {
+        Colour temp = firstColour;
+        firstColour = thirdColour;
+        thirdColour = secondColour;
+        secondColour = temp;
+    }
 
+    public void twistAntiClockwise() {
+        Colour temp = firstColour;
+        firstColour = secondColour;
+        secondColour = thirdColour;
+        thirdColour = temp;
+    }
 }
