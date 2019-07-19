@@ -10,30 +10,6 @@ public class Cube {
     ArrayList<Edge> edges;
 
     public Cube() {
-        // Initialise edges
-//        Edge WB = new Edge(1, Colour.WHITE, Colour.BLUE);
-//        Edge WR = new Edge(3, Colour.WHITE, Colour.RED);
-//        Edge WG = new Edge(5, Colour.WHITE, Colour.GREEN);
-//        Edge WO = new Edge(7, Colour.WHITE, Colour.ORANGE);
-//        Edge BO = new Edge(8, Colour.BLUE, Colour.ORANGE);
-//        Edge BR = new Edge(9, Colour.BLUE, Colour.RED);
-//        Edge GR = new Edge(10, Colour.GREEN, Colour.RED);
-//        Edge GO = new Edge(11, Colour.GREEN, Colour.ORANGE);
-//        Edge YB = new Edge(13, Colour.YELLOW, Colour.BLUE);
-//        Edge YR = new Edge(15, Colour.YELLOW, Colour.RED);
-//        Edge YG = new Edge(17, Colour.YELLOW, Colour.GREEN);
-//        Edge YO = new Edge(19, Colour.YELLOW, Colour.ORANGE);
-//
-//        // Initialise corners
-//        Corner WOB = new Corner(0, Colour.WHITE, Colour.ORANGE, Colour.BLUE);
-//        Corner WBR = new Corner(2, Colour.WHITE, Colour.BLUE, Colour.RED);
-//        Corner WRG = new Corner(4, Colour.WHITE, Colour.RED, Colour.GREEN);
-//        Corner WGO = new Corner(6, Colour.WHITE, Colour.GREEN, Colour.ORANGE);
-//        Corner YBO = new Corner(12, Colour.YELLOW, Colour.BLUE, Colour.ORANGE);
-//        Corner YRB = new Corner(14, Colour.YELLOW, Colour.RED, Colour.BLUE);
-//        Corner YGR = new Corner(16, Colour.YELLOW, Colour.GREEN, Colour.RED);
-//        Corner YOG = new Corner(18, Colour.YELLOW, Colour.ORANGE, Colour.GREEN);
-
         //Initialise Edges
         Edge WB = new Edge(0, Colour.WHITE, Colour.BLUE);
         Edge WR = new Edge(1, Colour.WHITE, Colour.RED);
@@ -97,16 +73,12 @@ public class Cube {
         // U2
         else if (degree == 2) {
             // Handle corners
-            Corner newUFR = corners.remove(0);
-            Corner newUFL = corners.remove(1);
-            corners.add(2, newUFR);
-            corners.add(3, newUFL);
+            swapCorners(0, 2);
+            swapCorners(1, 3);
 
             // Handle edges
-            Edge newUF = edges.remove(0);
-            Edge newUL = edges.remove(1);
-            edges.add(2, newUF);
-            edges.add(3, newUL);
+            swapEdges(0, 2);
+            swapEdges(1, 3);
         }
     }
 
@@ -137,16 +109,12 @@ public class Cube {
         // D2
         else if (degree == 2) {
             // Handle corners
-            Corner newDFR = corners.remove(4);
-            Corner newDFL = corners.remove(5);
-            corners.add(2, newDFR);
-            corners.add(3, newDFL);
+            swapCorners(4, 6);
+            swapCorners(5, 7);
 
             // Handle edges
-            Edge newDF = edges.remove(8);
-            Edge newDL = edges.remove(9);
-            edges.add(10, newDF);
-            edges.add(11, newDL);
+            swapEdges(8, 10);
+            swapEdges(9, 11);
         }
     }
 
@@ -155,80 +123,30 @@ public class Cube {
         // L
         if (degree == 1) {
             // Handle corners
-            Corner newFLU = corners.get(0);
-            newFLU.twistClockwise();
-
-            Corner newDLF = corners.get(3);
-            newDLF.twistAntiClockwise();
-
-            Corner newBLD = corners.get(7);
-            newBLD.twistClockwise();
-
-            Corner newUBL = corners.get(4);
-            newUBL.twistAntiClockwise();
-
-            corners.set(0, newUBL);
-            corners.set(3, newFLU);
-            corners.set(7, newDLF);
-            corners.set(4, newBLD);
+            singleMovesCorners(0, 3, 7, 4);
 
             // Handle edges
-            Edge newFL = edges.get(3);
-
-            edges.set(3, edges.get(4));
-            edges.set(4, edges.get(11));
-            edges.set(11, edges.get(7));
-            edges.set(7, newFL);
+            singleMovesEdges(3, 7, 11, 4, false);
         }
 
         // L'
         else if (degree == 3) {
             // Handle corners
-            Corner newBLD = corners.get(0);
-            newBLD.twistClockwise();
-
-            Corner newDLF = corners.get(4);
-            newDLF.twistAntiClockwise();
-
-            Corner newFLU = corners.get(7);
-            newFLU.twistClockwise();
-
-            Corner newUBL = corners.get(3);
-            newUBL.twistAntiClockwise();
-
-            corners.set(0, newUBL);
-            corners.set(3, newFLU);
-            corners.set(7, newDLF);
-            corners.set(4, newBLD);
+            singleMovesCorners(0, 4, 7, 3);
 
             // Handle edges
-            Edge newFL = edges.get(11);
-
-            edges.set(11, edges.get(4));
-            edges.set(4, edges.get(3));
-            edges.set(3, edges.get(7));
-            edges.set(7, newFL);
+            singleMovesEdges(3, 4, 11, 7, false);
         }
 
         // L2
         else if (degree == 2) {
             // Handle corners
-            Corner newDFL = corners.get(0);
-            Corner newDBL = corners.get(3);
-
-            corners.set(0, corners.get(7));
-            corners.set(7, newDFL);
-            corners.set(3, corners.get(4));
-            corners.set(4, newDBL);
+            swapCorners(0, 7);
+            swapCorners(3, 4);
 
             // Handle edges
-            Edge newDL = edges.get(3);
-            Edge newFL = edges.get(4);
-
-            edges.set(3, edges.get(11));
-            edges.set(11, newDL);
-            edges.set(4, edges.get(7));
-            edges.set(7, newFL);
+            swapEdges(3, 11);
+            swapEdges(4, 7);
         }
     }
 
@@ -237,80 +155,30 @@ public class Cube {
         // R
         if (degree == 1) {
             // Handle corners
-            Corner newBRD = corners.get(1);
-            newBRD.twistAntiClockwise();
-
-            Corner newDFR = corners.get(5);
-            newDFR.twistClockwise();
-
-            Corner newFRU = corners.get(6);
-            newFRU.twistAntiClockwise();
-
-            Corner newUBR = corners.get(2);
-            newUBR.twistClockwise();
-
-            corners.set(1, newUBR);
-            corners.set(5, newBRD);
-            corners.set(6, newDFR);
-            corners.set(2, newFRU);
+            singleMovesCorners(2, 1, 5, 6);
 
             // Handle edges
-            Edge newFR = edges.get(9);
-
-            edges.set(9, edges.get(5));
-            edges.set(5, edges.get(1));
-            edges.set(1, edges.get(6));
-            edges.set(6, newFR);
+            singleMovesEdges(1, 5, 9, 6, false);
         }
 
         // R'
         else if (degree == 3) {
             // Handle corners
-            Corner newFRU = corners.get(1);
-            newFRU.twistAntiClockwise();
-
-            Corner newDRF = corners.get(2);
-            newDRF.twistClockwise();
-
-            Corner newBRD = corners.get(6);
-            newBRD.twistAntiClockwise();
-
-            Corner newUBR = corners.get(5);
-            newUBR.twistClockwise();
-
-            corners.set(1, newUBR);
-            corners.set(2, newFRU);
-            corners.set(6, newDRF);
-            corners.set(5, newBRD);
+            singleMovesCorners(2, 6, 5, 1);
 
             // Handle edges
-            Edge newFR = edges.get(1);
-
-            edges.set(1, edges.get(5));
-            edges.set(5, edges.get(9));
-            edges.set(9, edges.get(6));
-            edges.set(6, newFR);
+            singleMovesEdges(1, 6, 9, 5, false);
         }
 
         // R2
         else if (degree == 2) {
             // Handle corners
-            Corner newDFR = corners.get(1);
-            Corner newDBR = corners.get(2);
-
-            corners.set(1, corners.get(6));
-            corners.set(6, newDFR);
-            corners.set(2, corners.get(5));
-            corners.set(5, newDBR);
+            swapCorners(1, 6);
+            swapCorners(2, 5);
 
             // Handle edges
-            Edge newDR = edges.get(1);
-            Edge newFR = edges.get(5);
-
-            edges.set(1, edges.get(9));
-            edges.set(9, newDR);
-            edges.set(5, edges.get(6));
-            edges.set(6, newFR);
+            swapEdges(1, 9);
+            swapEdges(5, 6);
         }
     }
 
@@ -319,100 +187,30 @@ public class Cube {
         // F
         if (degree == 1) {
             // Handle corners
-            Corner newRUF = corners.get(3);
-            newRUF.twistClockwise();
-
-            Corner newDRF = corners.get(2);
-            newDRF.twistAntiClockwise();
-
-            Corner newLFD = corners.get(6);
-            newLFD.twistClockwise();
-
-            Corner newUFL = corners.get(7);
-            newUFL.twistAntiClockwise();
-
-            corners.set(2, newRUF);
-            corners.set(6, newDRF);
-            corners.set(7, newLFD);
-            corners.set(3, newUFL);
+            singleMovesCorners(3, 2, 6, 7);
 
             // Handle edges
-            Edge newRF = edges.get(2);
-            newRF.flip();
-
-            Edge newDF = edges.get(6);
-            newDF.flip();
-
-            Edge newLF = edges.get(10);
-            newLF.flip();
-
-            Edge newUF = edges.get(7);
-            newUF.flip();
-
-            edges.set(6, newRF);
-            edges.set(10, newDF);
-            edges.set(7, newLF);
-            edges.set(2, newUF);
+            singleMovesEdges(2, 6, 10,7, true);
         }
 
         // F'
         else if (degree == 3) {
             // Handle corners
-            Corner newLFD = corners.get(3);
-            newLFD.twistClockwise();
-
-            Corner newDRF = corners.get(7);
-            newDRF.twistAntiClockwise();
-
-            Corner newRUF = corners.get(6);
-            newRUF.twistClockwise();
-
-            Corner newUFL = corners.get(2);
-            newUFL.twistAntiClockwise();
-
-            corners.set(2, newRUF);
-            corners.set(6, newDRF);
-            corners.set(7, newLFD);
-            corners.set(3, newUFL);
+            singleMovesCorners(3, 7, 6, 2);
 
             // Handle edges
-            Edge newLF = edges.get(2);
-            newLF.flip();
-
-            Edge newDF = edges.get(7);
-            newDF.flip();
-
-            Edge newRF = edges.get(10);
-            newRF.flip();
-
-            Edge newUF = edges.get(6);
-            newUF.flip();
-
-            edges.set(6, newRF);
-            edges.set(10, newDF);
-            edges.set(7, newLF);
-            edges.set(2, newUF);
+            singleMovesEdges(2, 7, 10, 6, true);
         }
 
         // F2
         else if (degree == 2) {
             // Handle corners
-            Corner newDFL = corners.get(2);
-            Corner newDFR = corners.get(3);
-
-            corners.set(2, corners.get(7));
-            corners.set(7, newDFL);
-            corners.set(3, corners.get(6));
-            corners.set(6, newDFR);
+            swapCorners(2, 7);
+            swapCorners(3, 6);
 
             // Handle edges
-            Edge newDF = edges.get(2);
-            Edge newFL = edges.get(6);
-
-            edges.set(2, edges.get(10));
-            edges.set(10, newDF);
-            edges.set(6, edges.get(7));
-            edges.set(7, newFL);
+            swapEdges(2, 10);
+            swapEdges(6, 7);
         }
     }
 
@@ -421,99 +219,75 @@ public class Cube {
         // B
         if (degree == 1) {
             // Handle corners
-            Corner newLBD = corners.get(0);
-            newLBD.twistAntiClockwise();
-
-            Corner newDRB = corners.get(4);
-            newDRB.twistClockwise();
-
-            Corner newRUB = corners.get(5);
-            newRUB.twistAntiClockwise();
-
-            Corner newUBL = corners.get(1);
-            newUBL.twistClockwise();
-
-            corners.set(1, newRUB);
-            corners.set(4, newDRB);
-            corners.set(4, newLBD);
-            corners.set(0, newUBL);
+            singleMovesCorners(1, 0, 4, 5);
 
             // Handle edges
-            Edge newLB = edges.get(0);
-            newLB.flip();
-
-            Edge newDB = edges.get(4);
-            newDB.flip();
-
-            Edge newRB = edges.get(8);
-            newRB.flip();
-
-            Edge newUB = edges.get(5);
-            newUB.flip();
-
-            edges.set(5, newRB);
-            edges.set(8, newDB);
-            edges.set(4, newLB);
-            edges.set(0, newUB);
+            singleMovesEdges(0, 4, 8, 5, true);
         }
 
         // B'
         else if (degree == 3) {
-            Corner newRUB = corners.get(0);
-            newRUB.twistAntiClockwise();
-
-            Corner newDRB = corners.get(1);
-            newDRB.twistClockwise();
-
-            Corner newLBD = corners.get(5);
-            newLBD.twistAntiClockwise();
-
-            Corner newUBL = corners.get(4);
-            newUBL.twistClockwise();
-
-            corners.set(1, newRUB);
-            corners.set(5, newDRB);
-            corners.set(4, newLBD);
-            corners.set(0, newUBL);
+            // Handle corners
+            singleMovesCorners(1, 5, 4, 0);
 
             // Handle edges
-            Edge newRB = edges.get(0);
-            newRB.flip();
-
-            Edge newDB = edges.get(5);
-            newDB.flip();
-
-            Edge newLB = edges.get(8);
-            newLB.flip();
-
-            Edge newUB = edges.get(4);
-            newUB.flip();
-
-            edges.set(5, newRB);
-            edges.set(8, newDB);
-            edges.set(4, newLB);
-            edges.set(0, newUB);
+            singleMovesEdges(0, 5, 8, 4, true);
         }
 
         // B2
         else if (degree == 2) {
             // Handle corners
-            Corner newDBR = corners.get(0);
-            Corner newDBL = corners.get(1);
-
-            corners.set(0, corners.get(5));
-            corners.set(5, newDBR);
-            corners.set(1, corners.get(4));
-            corners.set(4, newDBL);
+            swapCorners(0, 5);
+            swapCorners(1, 4);
 
             // Handle edges
-            Edge newDB = edges.get(0);
-            Edge newBL = edges.get(5);
+            swapEdges(0, 8);
+            swapEdges(4, 5);
+        }
+    }
 
-            edges.set(0, edges.get(8));
-            edges.set(8, newDB);
-            edges.set(5, edges.get(4));
-            edges.set(4, newBL);
+    /** Helper methods **/
+
+    private void swapCorners(int firstIndex, int secondIndex) {
+        Corner temp = corners.get(firstIndex);
+        corners.set(firstIndex, corners.get(secondIndex));
+        corners.set(secondIndex, temp);
+    }
+
+    private void swapEdges(int firstIndex, int secondIndex) {
+        Edge temp = edges.get(firstIndex);
+        edges.set(firstIndex, edges.get(secondIndex));
+        edges.set(secondIndex, temp);
+    }
+
+    private void singleMovesCorners(int firstIndex, int secondIndex, int thirdIndex, int fourthIndex) {
+        // firstIndex is the top left on that face. cycle is as such: first -> second -> third -> fourth
+
+        Corner first = corners.get(firstIndex).twistAntiClockwise();
+        Corner second = corners.get(secondIndex).twistClockwise();
+        Corner third = corners.get(thirdIndex).twistAntiClockwise();
+        Corner fourth = corners.get(fourthIndex).twistClockwise();
+
+        corners.set(secondIndex, first);
+        corners.set(thirdIndex, second);
+        corners.set(fourthIndex, third);
+        corners.set(firstIndex, fourth);
+    }
+
+    private void singleMovesEdges(int firstIndex, int secondIndex, int thirdIndex, int fourthIndex, boolean twist) {
+        Edge temp = edges.get(firstIndex);
+
+        if (twist) {
+            edges.set(firstIndex, edges.get(fourthIndex).flip());
+            edges.set(fourthIndex, edges.get(thirdIndex).flip());
+            edges.set(thirdIndex, edges.get(secondIndex)).flip();
+            edges.set(secondIndex, temp.flip());
+        }
+        else {
+            edges.set(firstIndex, edges.get(fourthIndex));
+            edges.set(fourthIndex, edges.get(thirdIndex));
+            edges.set(thirdIndex, edges.get(secondIndex));
+            edges.set(secondIndex, temp);
         }
     }
 }

@@ -1,6 +1,7 @@
 package ainesh1998;
 
 public class Edge extends Piece {
+
     Colour firstColour;
     Colour secondColour;
 
@@ -13,9 +14,10 @@ public class Edge extends Piece {
         this.originalPosition = position;
     }
 
-    public void flip() {
+    public Edge flip() {
         Colour temp = firstColour;
         firstColour = secondColour;
         secondColour = temp;
+        return this;
     }
 }
