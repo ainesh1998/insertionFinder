@@ -41,7 +41,69 @@ public class Cube {
     }
 
     public void applyMoves(ArrayList<Move> moves) {
+        for (Move move : moves) {
 
+            /*
+            IT IS PROBABLY BETTER TO USE A HASHMAP - MOVES AS KEYS, VALUES ARE THE METHODS
+             */
+
+            switch(move) {
+                case L:
+                    left(1);
+                    break;
+                case Lp:
+                    left(3);
+                    break;
+                case L2:
+                    left(2);
+                    break;
+                case R:
+                    right(1);
+                    break;
+                case Rp:
+                    right(3);
+                    break;
+                case R2:
+                    right(2);
+                    break;
+                case U:
+                    up(1);
+                    break;
+                case Up:
+                    up(3);
+                    break;
+                case U2:
+                    up(2);
+                    break;
+                case D:
+                    down(1);
+                    break;
+                case Dp:
+                    down(3);
+                    break;
+                case D2:
+                    down(2);
+                    break;
+                case F:
+                    front(1);
+                    break;
+                case Fp:
+                    front(3);
+                    break;
+                case F2:
+                    front(2);
+                    break;
+                case B:
+                    back(1);
+                    break;
+                case Bp:
+                    back(3);
+                    break;
+                case B2:
+                    back(2);
+                    break;
+            }
+        }
     }
 
     /** Methods that handle each move **/
