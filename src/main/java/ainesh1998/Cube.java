@@ -3,13 +3,28 @@ package ainesh1998;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Represents the cube itself.
+ */
+
 public class Cube {
 
-    ArrayList<Piece> pieces;
-    ArrayList<Corner> corners;
-    ArrayList<Edge> edges;
+    private ArrayList<Corner> corners;
+    private ArrayList<Edge> edges;
+
+    /**
+     * Initialises a solved cube.
+     */
 
     public Cube() {
+        resetCube();
+    }
+
+    /**
+     * Resets the cube to the solved state.
+     */
+
+    public void resetCube() {
         //Initialise Edges
         Edge WB = new Edge(0, Colour.WHITE, Colour.BLUE);
         Edge WR = new Edge(1, Colour.WHITE, Colour.RED);
@@ -34,76 +49,59 @@ public class Cube {
         Corner YGR = new Corner(6, Colour.YELLOW, Colour.GREEN, Colour.RED);
         Corner YOG = new Corner(7, Colour.YELLOW, Colour.ORANGE, Colour.GREEN);
 
-        pieces = new ArrayList<>(Arrays.asList(WOB, WB, WBR, WR, WRG, WG, WGO, WO, BO, BR, GR, GO, YBO, YB, YRB, YR, YGR, YG, YOG, YO));
-
         corners = new ArrayList<>(Arrays.asList(WOB, WBR, WRG, WGO, YBO, YRB, YGR, YOG));
         edges = new ArrayList<>(Arrays.asList(WB, WR, WG, WO, BO, BR, GR, GO, YB, YR, YG, YO));
     }
 
+    /**
+     * Manipulates the state of the cube by applying the given sequence of moves.
+     *
+     * @param moves The move sequence to be applied to the cube
+     */
+
     public void applyMoves(ArrayList<Move> moves) {
         for (Move move : moves) {
 
-            /*
-            IT IS PROBABLY BETTER TO USE A HASHMAP - MOVES AS KEYS, VALUES ARE THE METHODS
-             */
+            int degree;
+            if (Move.doubleMoves.contains(move)) degree = 2;
+            else if (Move.clockwiseMoves.contains(move)) degree = 1;
+            else degree = 3;
 
-            switch(move) {
-                case L:
-                    left(1);
-                    break;
-                case Lp:
-                    left(3);
-                    break;
-                case L2:
-                    left(2);
-                    break;
-                case R:
-                    right(1);
-                    break;
-                case Rp:
-                    right(3);
-                    break;
-                case R2:
-                    right(2);
-                    break;
-                case U:
-                    up(1);
-                    break;
-                case Up:
-                    up(3);
-                    break;
-                case U2:
-                    up(2);
-                    break;
-                case D:
-                    down(1);
-                    break;
-                case Dp:
-                    down(3);
-                    break;
-                case D2:
-                    down(2);
-                    break;
-                case F:
-                    front(1);
-                    break;
-                case Fp:
-                    front(3);
-                    break;
-                case F2:
-                    front(2);
-                    break;
-                case B:
-                    back(1);
-                    break;
-                case Bp:
-                    back(3);
-                    break;
-                case B2:
-                    back(2);
-                    break;
-            }
+            if (move == Move.U || move == Move.Up || move == Move.U2) up(degree);
+            else if (move == Move.D || move == Move.Dp || move == Move.D2) down(degree);
+            else if (move == Move.L || move == Move.Lp || move == Move.L2) left(degree);
+            else if (move == Move.R || move == Move.Rp || move == Move.R2) right(degree);
+            else if (move == Move.F || move == Move.Fp || move == Move.F2) front(degree);
+            else if (move == Move.B || move == Move.Bp || move == Move.B2) back(degree);
         }
+    }
+
+    public Corner getCornerAtIndex(int index) {
+        return corners.get(index);
+    }
+
+    public Edge getEdgeAtIndex(int index) {
+        return edges.get(index);
+    }
+
+    public ArrayList<Corner> getUnsolvedCorners() {
+        ArrayList<Corner> unsolved = new ArrayList<>();
+
+        for (Corner corner : corners) {
+            if (corner.originalPosition != corners.indexOf(corner)) unsolved.add(corner);
+        }
+
+        return unsolved;
+    }
+
+    public ArrayList<Edge> getUnsolvedEdges() {
+        ArrayList<Edge> unsolved = new ArrayList<>();
+
+        for (Edge edge : edges) {
+            if (edge.originalPosition != edges.indexOf(edge)) unsolved.add(edge);
+        }
+
+        return unsolved;
     }
 
     /** Methods that handle each move **/

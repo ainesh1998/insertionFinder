@@ -6,14 +6,14 @@ public class Corner extends Piece {
     Colour secondColour;
     Colour thirdColour;
 
-    public Corner(int position, Colour firstColour, Colour secondColour, Colour thirdColour) {
+    public Corner(int originalPosition, Colour firstColour, Colour secondColour, Colour thirdColour) {
         if (firstColour == secondColour && secondColour == thirdColour) throw new IllegalArgumentException();
 
         this.firstColour = firstColour;
         this.secondColour = secondColour;
         this.thirdColour = thirdColour;
 //        this.currentPosition = position;
-        this.originalPosition = position;
+        this.originalPosition = originalPosition;
     }
 
     public Corner twistClockwise() {
@@ -30,5 +30,9 @@ public class Corner extends Piece {
         secondColour = thirdColour;
         thirdColour = temp;
         return this;
+    }
+
+    public boolean equals(Corner corner) {
+        return corner.originalPosition == this.originalPosition && corner.firstColour == this.firstColour && corner.secondColour == this.secondColour && corner.thirdColour == this.thirdColour;
     }
 }

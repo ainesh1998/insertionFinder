@@ -5,13 +5,13 @@ public class Edge extends Piece {
     Colour firstColour;
     Colour secondColour;
 
-    public Edge(int position, Colour firstColour, Colour secondColour) {
+    public Edge(int originalPosition, Colour firstColour, Colour secondColour) {
         if (firstColour == secondColour) throw new IllegalArgumentException();
 
         this.firstColour = firstColour;
         this.secondColour = secondColour;
 //        this.currentPosition = position;
-        this.originalPosition = position;
+        this.originalPosition = originalPosition;
     }
 
     public Edge flip() {
@@ -19,5 +19,9 @@ public class Edge extends Piece {
         firstColour = secondColour;
         secondColour = temp;
         return this;
+    }
+
+    public boolean equals(Edge edge) {
+        return edge.originalPosition == this.originalPosition && edge.firstColour == this.firstColour && edge.secondColour == this.secondColour;
     }
 }
