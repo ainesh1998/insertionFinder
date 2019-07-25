@@ -13,7 +13,10 @@ public class TestEdge {
      */
 
     @Test
-    public void testSomething() {
-        assertTrue(true);
+    public void testFlip() {
+        Edge temp = new Edge(1, Colour.WHITE, Colour.RED);
+        temp.flip();
+        assertTrue(temp.firstColour == Colour.RED);
+        assertTrue(temp.secondColour == Colour.WHITE);
     }
 }

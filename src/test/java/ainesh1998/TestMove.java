@@ -12,6 +12,8 @@ public class TestMove {
      * Tests the Move class.
      */
 
+    //TODO: implement Move tests
+
     @Test
     public void testSomething() {
         assertTrue(true);

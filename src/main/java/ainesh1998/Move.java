@@ -8,4 +8,7 @@ public enum Move {
     public static final EnumSet<Move> doubleMoves = EnumSet.of(L2, R2, U2, D2, F2, B2);
     public static final EnumSet<Move> clockwiseMoves = EnumSet.of(L, R, U, D, F, B);
 
+    /*TODO: implement function that converts string containing alg to ArrayList<Move> - so strings can be used instead
+          of tediously writing Moves
+     */
 }

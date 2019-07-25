@@ -323,10 +323,10 @@ public class Cube {
     private void singleMovesCorners(int firstIndex, int secondIndex, int thirdIndex, int fourthIndex) {
         // firstIndex is the top left on that face. cycle is as such: first -> second -> third -> fourth
 
-        Corner first = corners.get(firstIndex).twistAntiClockwise();
-        Corner second = corners.get(secondIndex).twistClockwise();
-        Corner third = corners.get(thirdIndex).twistAntiClockwise();
-        Corner fourth = corners.get(fourthIndex).twistClockwise();
+        Corner first = corners.get(firstIndex).twistClockwise();
+        Corner second = corners.get(secondIndex).twistAntiClockwise();
+        Corner third = corners.get(thirdIndex).twistClockwise();
+        Corner fourth = corners.get(fourthIndex).twistAntiClockwise();
 
         corners.set(secondIndex, first);
         corners.set(thirdIndex, second);
@@ -338,12 +338,31 @@ public class Cube {
         Edge temp = edges.get(firstIndex);
 
         if (twist) {
-            edges.set(firstIndex, edges.get(fourthIndex).flip());
-            edges.set(fourthIndex, edges.get(thirdIndex).flip());
-            edges.set(thirdIndex, edges.get(secondIndex)).flip();
-            edges.set(secondIndex, temp.flip());
+            Edge first = edges.get(firstIndex).flip();
+            Edge second = edges.get(secondIndex).flip();
+            Edge third = edges.get(thirdIndex).flip();
+            Edge fourth = edges.get(fourthIndex).flip();
+
+            edges.set(secondIndex, first);
+            edges.set(thirdIndex, second);
+            edges.set(fourthIndex, third);
+            edges.set(firstIndex, fourth);
+
+//            edges.set(firstIndex, edges.get(fourthIndex).flip());
+//            edges.set(fourthIndex, edges.get(thirdIndex).flip());
+//            edges.set(thirdIndex, edges.get(secondIndex)).flip();
+//            edges.set(secondIndex, temp.flip());
         }
         else {
+//            Edge first = edges.get(firstIndex);
+//            Edge second = edges.get(secondIndex);
+//            Edge third = edges.get(thirdIndex);
+//            Edge fourth = edges.get(fourthIndex);
+//
+//            edges.set(secondIndex, first);
+//            edges.set(thirdIndex, second);
+//            edges.set(fourthIndex, third);
+//            edges.set(firstIndex, fourth);
             edges.set(firstIndex, edges.get(fourthIndex));
             edges.set(fourthIndex, edges.get(thirdIndex));
             edges.set(thirdIndex, edges.get(secondIndex));

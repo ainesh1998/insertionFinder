@@ -4,13 +4,13 @@ public class Edge extends Piece {
 
     Colour firstColour;
     Colour secondColour;
+    final int originalPosition;
 
     public Edge(int originalPosition, Colour firstColour, Colour secondColour) {
         if (firstColour == secondColour) throw new IllegalArgumentException();
 
         this.firstColour = firstColour;
         this.secondColour = secondColour;
-//        this.currentPosition = position;
         this.originalPosition = originalPosition;
     }
 
