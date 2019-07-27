@@ -1,5 +1,6 @@
 package ainesh1998;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 
 public enum Move {
@@ -11,4 +12,15 @@ public enum Move {
     /*TODO: implement function that converts string containing alg to ArrayList<Move> - so strings can be used instead
           of tediously writing Moves
      */
+
+    public ArrayList<Move> toMoves(String moves) {
+        ArrayList<Move> result = new ArrayList<>();
+        char[] moveChars = moves.toCharArray();
+
+//        for (char c : moveChars) {
+//
+//        }
+
+        return result;
+    }
 }

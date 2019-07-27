@@ -104,6 +104,14 @@ public class Cube {
         return unsolved;
     }
 
+    public ArrayList<Corner> getCorners() {
+        return corners;
+    }
+
+    public ArrayList<Edge> getEdges() {
+        return edges;
+    }
+
     /** Methods that handle each move **/
 
     private void up(int degree) {
