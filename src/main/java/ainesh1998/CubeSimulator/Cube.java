@@ -1,4 +1,4 @@
-package ainesh1998;
+package ainesh1998.CubeSimulator;
 
 import java.util.ArrayList;
 import java.util.Arrays;

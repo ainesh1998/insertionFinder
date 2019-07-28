@@ -1,4 +1,4 @@
-package ainesh1998;
+package ainesh1998.CubeSimulator;
 
 public class Edge extends Piece {
 

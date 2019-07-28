@@ -1,16 +1,18 @@
-package ainesh1998;
+package ainesh1998.CubeSimulator;
 
 import static org.junit.Assert.assertTrue;
 
+import ainesh1998.CubeSimulator.Corner;
+import ainesh1998.CubeSimulator.Cube;
+import ainesh1998.CubeSimulator.Edge;
+import ainesh1998.CubeSimulator.Move;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static ainesh1998.Move.*;
-import static ainesh1998.Colour.*;
+import static ainesh1998.CubeSimulator.Move.*;
+import static ainesh1998.CubeSimulator.Colour.*;
 
 /**
  * Unit test for simple App.

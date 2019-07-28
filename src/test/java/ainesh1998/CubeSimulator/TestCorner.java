@@ -1,7 +1,9 @@
-package ainesh1998;
+package ainesh1998.CubeSimulator;
 
 import static org.junit.Assert.assertTrue;
 
+import ainesh1998.CubeSimulator.Colour;
+import ainesh1998.CubeSimulator.Corner;
 import org.junit.Test;
 
 /**
